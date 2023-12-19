@@ -18,25 +18,25 @@
 
 #define BUF_SIZE (1024)
 #define LED_GPIO_PIN GPIO_NUM_2 
-#define TXD_PIN (UART_PIN_NO_CHANGE)  // Use default TX pin
-#define RXD_PIN (UART_PIN_NO_CHANGE)  // Use default RX pin
+#define TXD_PIN (UART_PIN_NO_CHANGE)  
+#define RXD_PIN (UART_PIN_NO_CHANGE)  
 
-//char *TAG = "MIDIController";
+
 uint8_t ble_addr_type;
 void ble_app_advertise(void);
 
-// Write data to ESP32 defined as server
+//Karakteristika za slanje podaka ESP32-u
 static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_gatt_access_ctxt *ctxt, void *arg)
 {
-    // Allocate memory for null-terminated string
+    
     char *data = (char *)malloc(ctxt->om->om_len + 1);
     if (data == NULL) {
-        // Handle memory allocation failure
+        
 
         return BLE_ATT_ERR_INSUFFICIENT_RES;
     }
 
-    // Copy data and null-terminate
+    
     memcpy(data, ctxt->om->om_data, ctxt->om->om_len);
     data[ctxt->om->om_len] = '\0';
     int messType,messChnl,param1,param2;
@@ -119,32 +119,18 @@ static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_g
         uart_write_bytes(UART_NUM_0, (const char*)midiMess, sizeof(midiMess));
     }
 
-
-    /*if (strcmp(data, "on") == 0 && ctxt->om->om_len == 2 ) {
-        uint8_t midiNoteOn[] = {0x90, 0x3C, 0x40};
-        uart_write_bytes(UART_NUM_0, (const char*)midiNoteOn, sizeof(midiNoteOn));
-
-    }else if(strcmp(data,"off")== 0 && ctxt->om->om_len == 3 ){ 
-        uint8_t midiNoteOff[] = {0x80, 0x3C, 0x40};
-        uart_write_bytes(UART_NUM_0, (const char*)midiNoteOff, sizeof(midiNoteOff));
-    }else  {
-        //printf("Data is not equal to 'eno'\n");
-    }*/
-
-    // Free allocated memory
     free(data);
 
         return 0;
 }
 
 
-// Array of pointers to other service definitions
-// UUID - Universal Unique Identifier
+
 static const struct ble_gatt_svc_def gatt_svcs[] = {
     {.type = BLE_GATT_SVC_TYPE_PRIMARY,
-     .uuid = BLE_UUID16_DECLARE(0x180),                 // Define UUID for device type
+     .uuid = BLE_UUID16_DECLARE(0x180),                 
      .characteristics = (struct ble_gatt_chr_def[]){
-         {.uuid = BLE_UUID16_DECLARE(0xDEAD),           // Define UUID for writing
+         {.uuid = BLE_UUID16_DECLARE(0xDEAD),           
           .flags = BLE_GATT_CHR_F_WRITE,
           .access_cb = device_write},
          {0}}},
@@ -155,20 +141,20 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
 {
     switch (event->type)
     {
-    // Advertise if connected
+    
     case BLE_GAP_EVENT_CONNECT:
-        //ESP_LOGI("GAP", "BLE GAP EVENT CONNECT %s", event->connect.status == 0 ? "OK!" : "FAILED!");
+        
         if (event->connect.status != 0)
         {
             ble_app_advertise();
         }
         break;
-    // Advertise again after completion of the event
+    
     case BLE_GAP_EVENT_DISCONNECT:
-        //ESP_LOGI("GAP", "BLE GAP EVENT DISCONNECTED");
+        
         break;
     case BLE_GAP_EVENT_ADV_COMPLETE:
-        //ESP_LOGI("GAP", "BLE GAP EVENT");
+        
         ble_app_advertise();
         break;
     default:
@@ -180,35 +166,35 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
 // Define the BLE connection
 void ble_app_advertise(void)
 {
-    // GAP - device name definition
+    
     struct ble_hs_adv_fields fields;
     const char *device_name;
     memset(&fields, 0, sizeof(fields));
-    device_name = ble_svc_gap_device_name(); // Read the BLE device name
+    device_name = ble_svc_gap_device_name();
     fields.name = (uint8_t *)device_name;
     fields.name_len = strlen(device_name);
     fields.name_is_complete = 1;
     ble_gap_adv_set_fields(&fields);
 
-    // GAP - device connectivity definition
+    
     struct ble_gap_adv_params adv_params;
     memset(&adv_params, 0, sizeof(adv_params));
-    adv_params.conn_mode = BLE_GAP_CONN_MODE_UND; // connectable or non-connectable
-    adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN; // discoverable or non-discoverable
+    adv_params.conn_mode = BLE_GAP_CONN_MODE_UND; 
+    adv_params.disc_mode = BLE_GAP_DISC_MODE_GEN; 
     ble_gap_adv_start(ble_addr_type, NULL, BLE_HS_FOREVER, &adv_params, ble_gap_event, NULL);
 }
 
-// The application
+
 void ble_app_on_sync(void)
 {
-    ble_hs_id_infer_auto(0, &ble_addr_type); // Determines the best address type automatically
-    ble_app_advertise();                     // Define the BLE connection
+    ble_hs_id_infer_auto(0, &ble_addr_type); 
+    ble_app_advertise();                     
 }
 
-// The infinite task
+
 void host_task(void *param)
 {
-    nimble_port_run(); // This function will return only when nimble_port_stop() is executed
+    nimble_port_run(); 
 }
 
 void app_main()
@@ -224,31 +210,31 @@ void app_main()
 
        
 
-        // Configuration for the UART communication
+        // UART config
         uart_config_t uart_config = {
-        .baud_rate = 38400,  // Standard MIDI baud rate
+        .baud_rate = 38400,  // MIDI baud rate
         .data_bits = UART_DATA_8_BITS,
         .parity    = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
         .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
     };
     
-    // Install the UART driver
+    // UART driver
     uart_driver_install(UART_NUM_0, BUF_SIZE * 2, 0, 0, NULL, 0);
     uart_param_config(UART_NUM_0, &uart_config);
     uart_set_pin(UART_NUM_0, TXD_PIN, RXD_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
     
-    // Configure GPIO
+    
     gpio_config(&io_conf);
     
-    nvs_flash_init();                          // 1 - Initialize NVS flash using
-    // esp_nimble_hci_and_controller_init();      // 2 - Initialize ESP controller
-    nimble_port_init();                        // 3 - Initialize the host stack
-    ble_svc_gap_device_name_set("MIDI_Controller"); // 4 - Initialize NimBLE configuration - server name
-    ble_svc_gap_init();                        // 4 - Initialize NimBLE configuration - gap service
-    ble_svc_gatt_init();                       // 4 - Initialize NimBLE configuration - gatt service
-    ble_gatts_count_cfg(gatt_svcs);            // 4 - Initialize NimBLE configuration - config gatt services
-    ble_gatts_add_svcs(gatt_svcs);             // 4 - Initialize NimBLE configuration - queues gatt services.
-    ble_hs_cfg.sync_cb = ble_app_on_sync;      // 5 - Initialize application
-    nimble_port_freertos_init(host_task);      // 6 - Run the thread
+    nvs_flash_init();                          
+    
+    nimble_port_init();                        
+    ble_svc_gap_device_name_set("MIDI_Controller"); 
+    ble_svc_gap_init();                        
+    ble_svc_gatt_init();                       
+    ble_gatts_count_cfg(gatt_svcs);            
+    ble_gatts_add_svcs(gatt_svcs);             
+    ble_hs_cfg.sync_cb = ble_app_on_sync;      
+    nimble_port_freertos_init(host_task);      
 }
