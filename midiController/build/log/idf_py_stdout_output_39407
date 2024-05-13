@@ -1,0 +1,75 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:7084
+ho 0 tail 12 room 4
+load:0x40078000,len:15584
+load:0x40080400,len:4
+load:0x40080404,len:3876
+entry 0x4008064c
+[0;32mI (31) boot: ESP-IDF v5.1.2-dirty 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time May  6 2024 14:20:58[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (35) boot: chip revision: v1.0[0m
+[0;32mI (39) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (44) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (48) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (53) boot: Enabling RNG early entropy source...[0m
+[0;32mI (58) boot: Partition Table:[0m
+[0;32mI (62) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (69) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (77) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (84) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (92) boot: End of partition table[0m
+[0;32mI (96) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=18b24h (101156) map[0m
+[0;32mI (141) esp_image: segment 1: paddr=00028b4c vaddr=3ffbdb60 size=049b8h ( 18872) load[0m
+[0;32mI (149) esp_image: segment 2: paddr=0002d50c vaddr=40080000 size=02b0ch ( 11020) load[0m
+[0;32mI (153) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=61664h (398948) map[0m
+[0;32mI (299) esp_image: segment 4: paddr=0009168c vaddr=40082b0c size=17960h ( 96608) load[0m
+[0;32mI (353) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (353) boot: Disabling RNG early entropy source...[0m
+[0;32mI (364) cpu_start: Multicore app[0m
+[0;32mI (365) cpu_start: Pro cpu up.[0m
+[0;32mI (365) cpu_start: Starting app cpu, entry point is 0x40081568[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (383) cpu_start: Pro cpu start user code[0m
+[0;32mI (383) cpu_start: cpu freq: 240000000 Hz[0m
+[0;32mI (383) cpu_start: Application information:[0m
+[0;32mI (387) cpu_start: Project name:     BLE-Connect[0m
+[0;32mI (393) cpu_start: App version:      45f942d-dirty[0m
+[0;32mI (398) cpu_start: Compile time:     May  6 2024 14:20:51[0m
+[0;32mI (404) cpu_start: ELF file SHA256:  8785862a...[0m
+[0;32mI (410) cpu_start: ESP-IDF:          v5.1.2-dirty[0m
+[0;32mI (415) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (420) cpu_start: Max chip rev:     v3.99 [0m
+[0;32mI (425) cpu_start: Chip rev:         v1.0[0m
+[0;32mI (429) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (437) heap_init: At 3FFAFF10 len 000000F0 (0 KiB): DRAM[0m
+[0;32mI (442) heap_init: At 3FFB6388 len 00001C78 (7 KiB): DRAM[0m
+[0;32mI (449) heap_init: At 3FFB9A20 len 00004108 (16 KiB): DRAM[0m
+[0;32mI (455) heap_init: At 3FFC5288 len 0001AD78 (107 KiB): DRAM[0m
+[0;32mI (461) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (467) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (474) heap_init: At 4009A46C len 00005B94 (22 KiB): IRAM[0m
+[0;32mI (481) spi_flash: detected chip: gd[0m
+[0;32mI (484) spi_flash: flash io: dio[0m
+[0;32mI (489) coexist: coex firmware version: b6d5e8c[0m
+[0;32mI (494) app_start: Starting scheduler on CPU0[0m
+[0;32[0;32mI (498) app_start: Starting scheduler on CPU1[0m
+mI (498) main_task: Started on CPU0[0m
+[0;32mI (508) main_task: Calling app_main()[0m
+Hello![0;32mI (508) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
+[0;32mI (548) BTDM_INIT: BT controller compile version [ec4ac65][0m
+[0;32mI (548) BTDM_INIT: Bluetooth MAC: 30:ae:a4:22:d4:0a[0m
+[0;32mI (548) phy_init: phy_version 4780,16b31a7,Sep 22 2023,20:42:16[0m
+[0;32mI (768) main_task: Returned from app_main()[0m
+[0;32mI (798) NimBLE: Failed to restore IRKs from store; status=8
+[0m
+[0;32mI (808) NimBLE: GAP procedure initiated: advertise; [0m
+[0;32mI (808) NimBLE: disc_mode=2[0m
+[0;32mI (808) NimBLE:  adv_channel_map=0 own_addr_type=0 adv_filter_policy=0 adv_itvl_min=0 adv_itvl_max=0[0m
+[0;32mI (818) NimBLE: 
+[0m

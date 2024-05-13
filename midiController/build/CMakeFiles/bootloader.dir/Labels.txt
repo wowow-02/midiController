@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/eno/Desktop/projekt_r/midiController/midiController/build/CMakeFiles/bootloader
+/home/eno/Desktop/projekt_r/midiController/midiController/build/CMakeFiles/bootloader.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/CMakeFiles/bootloader-complete.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/eno/Desktop/projekt_r/midiController/midiController/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
