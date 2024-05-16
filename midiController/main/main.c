@@ -103,7 +103,7 @@ static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_g
         if(bytesWritten != sizeof(midiMess)){
             printf("Error writing to UART:%s\n",midiMess);
         }else{
-            printf("Data sent to UART\n");
+            printf("Data sent to UART:%d\n",bytesWritten);
         }
     }else{
         if(data[0] == 'R'){
@@ -126,7 +126,7 @@ static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_g
         if(bytesWritten != sizeof(midiMess)){
             printf("Error writing to UART:%s\n",midiMess);
         }else{
-            printf("Data sent to UART \n");
+            printf("Data sent to UART:%d \n",bytesWritten);
         }
     }
 
@@ -157,6 +157,11 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
         if (event->connect.status != 0)
         {
             ble_app_advertise();
+        }else{
+            //blinkaj LED prilikom uspostave konekcije
+            gpio_set_level(LED_GPIO_PIN,1);
+            vTaskDelay(1000 / portTICK_PERIOD_MS);
+            gpio_set_level(LED_GPIO_PIN,0);
         }
         break;
     
@@ -233,7 +238,6 @@ void app_main()
     uart_driver_install(UART_NUM_2, BUF_SIZE * 2, 0, 0, NULL, 0);
     uart_param_config(UART_NUM_2, &uart_config);
     uart_set_pin(UART_NUM_2, TXD_PIN, RXD_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
-    
     
     gpio_config(&io_conf);
     
