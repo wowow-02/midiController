@@ -101,9 +101,9 @@ static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_g
         uint8_t midiMess[]={messType,param1,param2};
         int bytesWritten=uart_write_bytes(UART_NUM_2, (const char*)midiMess, sizeof(midiMess));
         if(bytesWritten != sizeof(midiMess)){
-            printf("Error writing to UART:%s\n",midiMess);
+            printf("Error writing to UART\n");
         }else{
-            printf("Data sent to UART:%d\n",bytesWritten);
+            printf("Data sent to UART\n");
         }
     }else{
         if(data[0] == 'R'){
@@ -124,9 +124,9 @@ static int device_write(uint16_t conn_handle, uint16_t attr_handle, struct ble_g
             
         int bytesWritten=uart_write_bytes(UART_NUM_2, (const char*)midiMess, sizeof(midiMess));
         if(bytesWritten != sizeof(midiMess)){
-            printf("Error writing to UART:%s\n",midiMess);
+            printf("Error writing to UART\n");
         }else{
-            printf("Data sent to UART:%d \n",bytesWritten);
+            printf("Data sent to UART \n");
         }
     }
 
@@ -238,6 +238,7 @@ void app_main()
     uart_driver_install(UART_NUM_2, BUF_SIZE * 2, 0, 0, NULL, 0);
     uart_param_config(UART_NUM_2, &uart_config);
     uart_set_pin(UART_NUM_2, TXD_PIN, RXD_PIN, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
+    
     
     gpio_config(&io_conf);
     
