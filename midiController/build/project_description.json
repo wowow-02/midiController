@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "BLE-Connect",
-    "project_version":    "7882024-dirty",
+    "project_version":    "66da369-dirty",
     "project_path":       "/home/eno/Desktop/projekt_r/midiController/midiController",
     "idf_path":           "/home/eno/esp/esp-idf",
     "build_dir":          "/home/eno/Desktop/projekt_r/midiController/midiController/build",

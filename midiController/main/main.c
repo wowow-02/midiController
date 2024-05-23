@@ -166,6 +166,7 @@ static int ble_gap_event(struct ble_gap_event *event, void *arg)
         break;
     
     case BLE_GAP_EVENT_DISCONNECT:
+        ble_app_advertise();
         
         break;
     case BLE_GAP_EVENT_ADV_COMPLETE:
